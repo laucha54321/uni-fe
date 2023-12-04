@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    %sveltekit.head%
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <main class="container">
+      <nav>
+        <ul>
+          <li><strong>UTN</strong></li>
+        </ul>
+        <ul>
+          <li>
+            <details role="list" dir="rtl">
+              <summary aria-haspopup="listbox" role="link">Menu</summary>
+              <ul role="listbox">
+                <li><a href="/misNotas">Notas</a></li>
+                <li><a href="/perfil">Perfil</a></li>
+                <li><a href="/login">Salir</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+      <div style="display: contents">%sveltekit.body%</div>
+    </main>
+  </body>
+</html>
