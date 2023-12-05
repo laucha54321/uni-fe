@@ -1,7 +1,7 @@
 <script>
   let loading = false;
   let aux = "d758a41d-0ffa-4b6a-a6f2-714697001042";
-  let inscripto = false;
+  let inscripto = "";
   export let idCurso;
 
   async function inscribirse(idCurso) {
@@ -29,12 +29,14 @@
         console.log(response.status);
         if (response.status === 200) {
           loading = false;
-          inscripto = true;
+          inscripto = "ok";
+        } else {
         }
       })
       .catch((error) => {
         console.log("error", error);
         loading = false;
+        inscripto = "error";
       });
   }
 </script>
@@ -43,8 +45,10 @@
   <summary role="button" class="secondary"><slot name="nombre" /></summary>
   <p><slot name="descripcion" /></p>
   <div style="padding: 20px;">
-    {#if inscripto}
+    {#if inscripto === "ok"}
       <ins>Tu inscripcion se a procesado correctamente.</ins>
+    {:else if inscripto === "error"}
+      <ins class="error">Error en la inscripcion. Intenta mas tarde.</ins>
     {:else}
       <button
         on:click={inscribirse(idCurso)}
@@ -54,3 +58,9 @@
     {/if}
   </div>
 </details>
+
+<style>
+  .error {
+    color: red;
+  }
+</style>

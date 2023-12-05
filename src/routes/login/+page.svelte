@@ -1,7 +1,7 @@
 <div>
   <hgroup>
     <h1>Ingresar</h1>
-    <h2>Campus Virtual UTN</h2>
+    <h2>Sistema de Autogestion</h2>
   </hgroup>
   <form>
     <input
