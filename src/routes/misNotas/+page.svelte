@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
-  const id = "7afcaa45-c8cb-4c79-97fa-d33b06ffc7d8";
+  const id = "d758a41d-0ffa-4b6a-a6f2-714697001042";
 
   let notas = [];
   let loading = true;
@@ -17,17 +17,19 @@
       .then((result) => {
         notas = result;
         loading = false;
-        console.log(result);
       })
       .catch((error) => console.log("error", error));
   });
 </script>
 
 <h1>Mis Notas:</h1>
-<div class="scroll-x">
-  {#if loading}
-    <p aria-busy="true">Cargando Notas</p>
-  {:else}
+
+{#if loading}
+  <p aria-busy="true">Cargando Notas</p>
+{:else if notas.length === 0}
+  <a role="button" class="contrast">No Pudimos Encontrar Ninguna Nota</a>
+{:else}
+  <figure>
     <table>
       <thead>
         <tr>
@@ -47,11 +49,8 @@
         <tr></tr>
       </tbody>
     </table>
-  {/if}
-</div>
+  </figure>
+{/if}
 
 <style>
-  .scroll-x {
-    overflow-x: auto;
-  }
 </style>
