@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import Modal from "../../components/modal.svelte";
+
   let cursos = [];
   let loading = true;
 

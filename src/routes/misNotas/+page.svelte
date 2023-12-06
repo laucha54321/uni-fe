@@ -1,24 +1,41 @@
 <script>
   import { onMount } from "svelte";
-
-  const id = "d758a41d-0ffa-4b6a-a6f2-714697001042";
+  import userToken from "$lib/user";
 
   let notas = [];
   let loading = true;
 
   onMount(() => {
+    let token = "";
+
+    userToken.subscribe((data) => {
+      console.log(data);
+      if (data.accessToken == "") {
+        throw redirect(307, "/login");
+      } else {
+        token = data.accessToken;
+      }
+    });
+
+    var myHeaders = new Headers();
+    myHeaders.append("authorization", "Bearer " + token);
+
     var requestOptions = {
       method: "GET",
+      headers: myHeaders,
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/nota/persona/" + id, requestOptions)
+    fetch("http://localhost:3000/nota/persona", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         notas = result;
         loading = false;
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        console.log(error);
+        loading = false;
+      });
   });
 </script>
 
