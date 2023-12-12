@@ -1,5 +1,7 @@
 <script>
+  import userToken from "$lib/user";
   import accessToken from "$lib/user";
+  import { onMount } from "svelte";
   let loading = false;
 
   let loggedIn = false;
@@ -8,6 +10,14 @@
   let password = "";
 
   let error = "";
+
+  onMount(() => {
+    userToken.subscribe((data) => {
+      if (userToken.accessToken !== "") {
+        loggedIn = true;
+      }
+    });
+  });
 
   $: login = () => {
     if (username !== "" && password !== "") {

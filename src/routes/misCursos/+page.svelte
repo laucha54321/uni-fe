@@ -1,20 +1,32 @@
 <script>
   import { onMount } from "svelte";
+  import userToken from "$lib/user";
 
   let cursos = [];
   let loading = true;
 
-  let id = "d758a41d-0ffa-4b6a-a6f2-714697001042";
-
   onMount(() => {
+    let token = "";
+
+    userToken.subscribe((data) => {
+      console.log(data);
+      if (data.accessToken !== "") {
+        token = data.accessToken;
+      }
+    });
+
+    var myHeaders = new Headers();
+    myHeaders.append("authorization", "Bearer " + token);
     var requestOptions = {
       method: "GET",
+      headers: myHeaders,
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/curso_persona/" + id, requestOptions)
+    fetch("http://localhost:3000/curso_persona/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         cursos = result;
         loading = false;
       })

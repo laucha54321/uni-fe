@@ -10,9 +10,7 @@
 
     userToken.subscribe((data) => {
       console.log(data);
-      if (data.accessToken == "") {
-        throw redirect(307, "/login");
-      } else {
+      if (data.accessToken !== "") {
         token = data.accessToken;
       }
     });
